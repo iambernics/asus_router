@@ -25,6 +25,8 @@
 
 ### 🔧 4. Set Execution Environment
 - **Login to the router with PuTTY.**
+- **Set the `http_site`, `minimum_uptime`, `command_if_no_internet` variables  
+to define minimum uptime in minutes, HTTP site to check, and command to execute if no internet connection**
 - **Set RWX permissions to Owner and Group:**  
    ```bash
    chmod 770 /root/router_health_check.sh  
