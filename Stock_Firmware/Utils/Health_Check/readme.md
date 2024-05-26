@@ -29,13 +29,17 @@
    ```bash
    chmod 770 /root/router_health_check.sh  
 
-- **Create a cron job to execute on a minute basis.**
+- **Create a cron job to execute on five minute basis.**
    ```bash
-   cru a router_health_check */1 * * * * /root/router_health_check.sh
+   cru a router_health_check */5 * * * * /root/router_health_check.sh
 
 - List existing cron jobs:
    ```bash
    cru l
+
+- Delete Cron job:
+   ```bash
+   cru d router_health_check
 
 ### 📚 Resources
 [Crontab Calculator](https://crontab.cronhub.io/)

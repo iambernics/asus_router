@@ -1,15 +1,25 @@
 #!/bin/bash
 
-# Define the URL to check
+# Define minimum uptime in minutes, HTTP site to check, and command to execute if no internet connection
 http_site="http://domain.hu"
+minimum_uptime=10
+command_if_no_internet="reboot -f"
+
+# Get uptime in minutes
+upSeconds="$(cat /proc/uptime | grep -o '^[0-9]\+')"
+upMins=$((${upSeconds} / 60))
 
 # Perform a HEAD request to the URL and extract the HTTP status code
 http_code=$(curl -LI "$http_site" -o /dev/null -w '%{http_code}\n' -s)
 
-# Output the HTTP status code to the console
-echo "$http_code"
-
-# If the HTTP status code is not 200 (OK), reboot the router
+# If the HTTP status code is not 200 (OK) AND uptime > 10 min, reboot the router
 if [ "$http_code" != "200" ]; then
-  reboot -f
+  if  [ $upMins > $minimum_uptime ]; then
+   echo "Rebooting the router.."  
+   echo "$command_if_no_internet" | bash
+  else
+   echo "No internet connection but uptime is less than 10 minutes, not rebooting.."
+  fi
+else
+ echo "Internet connection is OK"
 fi
