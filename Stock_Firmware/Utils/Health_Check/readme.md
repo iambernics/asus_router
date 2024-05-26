@@ -25,15 +25,15 @@
 
 ### 🔧 4. Set Execution Environment
 - **Login to the router with PuTTY.**
-- **Set the `http_site`, `minimum_uptime`, `command_if_no_internet` variables  
-to define minimum uptime in minutes, HTTP site to check, and command to execute if no internet connection**
+- **Set the `http_site`, `minimum_uptime`, `command_if_no_internet`, `delay` variables  
+to define minimum uptime in minutes, HTTP site to check, dealy in sec. for restart and command to execute if no internet connection**
 - **Set RWX permissions to Owner and Group:**  
    ```bash
    chmod 770 /root/router_health_check.sh  
 
 - **Create a cron job to execute on five minute basis.**
    ```bash
-   cru a router_health_check */5 * * * * /root/router_health_check.sh
+   cru a router_health_check */1 * * * * /root/router_health_check.sh
 
 - List existing cron jobs:
    ```bash
